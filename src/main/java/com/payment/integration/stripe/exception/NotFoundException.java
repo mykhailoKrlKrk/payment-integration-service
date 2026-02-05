@@ -2,7 +2,6 @@ package com.payment.integration.stripe.exception;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 public class NotFoundException extends RestException {
 

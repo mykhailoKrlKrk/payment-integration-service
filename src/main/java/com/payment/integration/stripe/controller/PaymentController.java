@@ -1,7 +1,7 @@
 package com.payment.integration.stripe.controller;
 
-import com.payment.integration.stripe.dto.param.CreatePaymentParam;
 import com.payment.integration.stripe.dto.PaymentResponseDto;
+import com.payment.integration.stripe.dto.param.CreatePaymentParam;
 import com.payment.integration.stripe.model.enums.PaymentStatus;
 import com.payment.integration.stripe.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,9 +33,9 @@ public class PaymentController {
     @Operation(
             summary = "Create payment",
             description = """
-                Creates a payment on server side and initializes provider-specific payment flow.
-                The selected provider defines how the payment is processed (e.g. Stripe, PayPal).
-                """
+                    Creates a payment on server side and initializes provider-specific payment flow.
+                    The selected provider defines how the payment is processed (e.g. Stripe, PayPal).
+                    """
     )
     @ApiResponse(
             responseCode = "201",
@@ -79,5 +79,20 @@ public class PaymentController {
     )
     public PaymentStatus getPaymentStatus(@PathVariable UUID id) {
         return paymentService.getPaymentStatus(id);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Get full payment details by id")
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully fetched payment details",
+            content = @Content(schema = @Schema(implementation = PaymentResponseDto.class))
+    )
+    @ApiResponse(
+            responseCode = "404",
+            description = "Payment with provided id is not found"
+    )
+    public PaymentResponseDto getPayment(@PathVariable UUID id) {
+        return paymentService.getPayment(id);
     }
 }

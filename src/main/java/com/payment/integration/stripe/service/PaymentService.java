@@ -1,7 +1,7 @@
 package com.payment.integration.stripe.service;
 
-import com.payment.integration.stripe.dto.param.CreatePaymentParam;
 import com.payment.integration.stripe.dto.PaymentResponseDto;
+import com.payment.integration.stripe.dto.param.CreatePaymentParam;
 import com.payment.integration.stripe.exception.ConflictException;
 import com.payment.integration.stripe.exception.NotFoundException;
 import com.payment.integration.stripe.mapper.PaymentMapper;
@@ -66,5 +66,11 @@ public class PaymentService {
             return paymentRepository.getPaymentStatus(id);
         }
         throw new NotFoundException("Failed: payment with provided id is not exist!");
+    }
+
+    public PaymentResponseDto getPayment(UUID id) {
+        return paymentRepository.findById(id)
+                .map(paymentMapper::toPaymentResponseDto)
+                .orElseThrow(() -> new NotFoundException("Payment with provided id is not found"));
     }
 }

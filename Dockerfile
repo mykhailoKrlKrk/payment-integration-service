@@ -5,7 +5,6 @@ COPY mvnw .mvn pom.xml src/main ./
 
 RUN ./mvnw package -B -DskipTests -Dcheckstyle.skip=true
 
-
 # in this image default non-root user(65532)
 FROM dhi.io/amazoncorretto:21 as runtime
 

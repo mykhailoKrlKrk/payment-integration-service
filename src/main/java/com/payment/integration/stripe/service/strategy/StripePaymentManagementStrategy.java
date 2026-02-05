@@ -35,7 +35,9 @@ public class StripePaymentManagementStrategy implements PaymentManagementStrateg
 
         try {
             PaymentIntent intent = PaymentIntent.create(params, requestOptions);
-            return new PaymentResponseDto(intent.getId(), intent.getClientSecret(), intent.getStatus());
+            return new PaymentResponseDto(payment.getId(), payment.getAmount(),
+                    payment.getCurrency(), intent.getId(), intent.getClientSecret(),
+                    intent.getStatus());
         } catch (StripeException e) {
             log.error("Failed to process payment {}", e.getMessage());
             throw new InternalErrorException("Failed to process payment: " + e.getMessage());

@@ -23,15 +23,17 @@ public interface PaymentRepository extends JpaRepository<Payment, UUID> {
 
     Optional<Payment> findByIdempotencyKey(String idempotencyKey);
 
-    Optional<Payment> findByProviderAndProviderPaymentId(PaymentProvider provider, String providerId);
+    Optional<Payment> findByProviderAndProviderPaymentId(
+            PaymentProvider provider, String providerId);
 
     @Query("""
-        SELECT payment
-        FROM Payment payment
-        WHERE payment.status IN :statuses
-          AND payment.providerPaymentId IS NOT NULL
-          AND payment.isDeleted = FALSE
-        ORDER BY payment.updatedAt ASC
-        """)
-    List<Payment> findForSync(@Param("statuses") Collection<PaymentStatus> statuses, Pageable pageable);
+            SELECT payment
+            FROM Payment payment
+            WHERE payment.status IN :statuses
+              AND payment.providerPaymentId IS NOT NULL
+              AND payment.isDeleted = FALSE
+            ORDER BY payment.updatedAt ASC
+            """)
+    List<Payment> findForSync(
+            @Param("statuses") Collection<PaymentStatus> statuses, Pageable pageable);
 }

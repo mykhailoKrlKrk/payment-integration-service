@@ -14,8 +14,6 @@ public final class StripePaymentStatusMapper {
                     StripeIntentStatus.CANCELED, PaymentStatus.DECLINED
             );
 
-    private StripePaymentStatusMapper() {}
-
     public static PaymentStatus map(PaymentIntent intent) {
         StripeIntentStatus stripeStatus = StripeIntentStatus.from(intent.getStatus());
 

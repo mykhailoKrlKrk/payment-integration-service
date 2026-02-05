@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PaymentStatusScheduler {
 
-    @Value("${payments.sync.batch-size}")
-    private int batchSize;
-
     private final PaymentRepository paymentRepository;
     private final StripePaymentSyncService paymentSyncService;
+
+    @Value("${payments.sync.batch-size}")
+    private int batchSize;
 
     @Scheduled(fixedDelayString = "${payments.sync.fixed-delay-ms}")
     public void syncPendingPayments() {

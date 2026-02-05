@@ -22,9 +22,10 @@ public class StripePaymentSyncService {
 
     @Transactional
     public void syncByProviderPaymentId(PaymentProvider provider, String providerPaymentId) {
-        Payment payment = paymentRepository.findByProviderAndProviderPaymentId(provider, providerPaymentId)
-                .orElseThrow(() -> new IllegalStateException(
-                        "Payment not found for providerPaymentId=" + providerPaymentId));
+        Payment payment =
+                paymentRepository.findByProviderAndProviderPaymentId(provider, providerPaymentId)
+                        .orElseThrow(() -> new IllegalStateException(
+                                "Payment not found for providerPaymentId=" + providerPaymentId));
 
         if (isFinal(payment.getStatus())) {
             log.info("Payment {} is final", payment.getId());
