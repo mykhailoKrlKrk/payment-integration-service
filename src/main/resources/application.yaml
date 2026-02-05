@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE:dev}
+  application:
+    name: stripe-payment-integration
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:stripe_payments}
+    username: ${DB_USERNAME:stripe_user}
+    password: ${DB_PASSWORD:stripe_pass}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+server:
+  servlet:
+    context-path: /payment-integration/api/
+
+stripe:
+  secret-key: ${STRIPE_SECRET_KEY:}
+  web-hook-secret-key: ${STRIPE_WEBHOOK_SECRET:}
+
+payments:
+  sync:
+    fixed-delay-ms: 30000
+    batch-size: 50

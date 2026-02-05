@@ -1,0 +1,38 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: stripe_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: stripe_payments
+      POSTGRES_USER: stripe_user
+      POSTGRES_PASSWORD: stripe_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - stripe_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stripe_user -d stripe_payments"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  payment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+    container_name:
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+       postgres:
+         condition: service_healthy
+
+
+
+
+volumes:
+  stripe_pg_data:
