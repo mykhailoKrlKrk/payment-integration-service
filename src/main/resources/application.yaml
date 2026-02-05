@@ -20,6 +20,22 @@ server:
   servlet:
     context-path: /payment-integration/api/
 
+cors:
+  allowed-origins:
+    - http://localhost:3000
+    - http://localhost:5173
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - "*"
+  allow-credentials: false
+  max-age: 3600
+
 stripe:
   secret-key: ${STRIPE_SECRET_KEY:}
   web-hook-secret-key: ${STRIPE_WEBHOOK_SECRET:}

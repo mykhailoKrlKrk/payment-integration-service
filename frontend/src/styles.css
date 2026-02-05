@@ -1,0 +1,260 @@
+:root {
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --accent: #4f46e5;
+  --accent-600: #4338ca;
+  --muted: #6b7280;
+  --danger: #ef4444;
+  --success: #10b981;
+  --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+  --max-width: 720px;
+  --container-padding: 20px;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100vh; /* occupy full viewport to allow vertical centering */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.app-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #0b1220;
+}
+.app-subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Card */
+.card {
+  background: var(--card);
+  padding: 22px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 680px; /* keep card reasonably narrow on wide screens */
+}
+
+/* Form layout */
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 13px;
+  color: #0b1220;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.input, input, select {
+  height: 44px;
+  width: 100%;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  background: #fff;
+  color: #0f172a;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+
+.input:focus, input:focus, select:focus {
+  border-color: var(--accent-600);
+  box-shadow: 0 4px 18px rgba(79,70,229,0.08);
+}
+
+/* Stripe CardElement wrapper */
+.card-element-wrapper {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  background: #fff;
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+.card-element-wrapper:focus-within {
+  border-color: var(--accent-600);
+  box-shadow: 0 6px 18px rgba(67,56,202,0.08);
+}
+
+/* Button */
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-600) 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease, opacity .12s ease;
+  box-shadow: 0 6px 14px rgba(79,70,229,0.12);
+}
+
+button:active { transform: translateY(1px); }
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Small neutral button */
+.btn-muted {
+  background: transparent;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border: 1px solid transparent;
+}
+
+/* Hints */
+.hints {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Status and banners */
+.status {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.banner {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.banner.success {
+  background: linear-gradient(90deg, rgba(16,185,129,1) 0%, rgba(16,185,129,0.92) 100%);
+  color: white;
+}
+
+.banner.error {
+  background: linear-gradient(90deg, rgba(239,68,68,1) 0%, rgba(239,68,68,0.92) 100%);
+  color: white;
+}
+
+.banner.processing {
+  background: linear-gradient(90deg, rgba(99,102,241,1) 0%, rgba(79,70,229,1) 100%);
+  color: white;
+}
+
+/* Result table */
+.result {
+  margin-top: 14px;
+  font-size: 14px;
+}
+.result table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.result td {
+  padding: 8px 6px;
+  vertical-align: top;
+  border-bottom: 1px dashed #eef2ff;
+}
+.result td:first-child {
+  color: var(--muted);
+  width: 28%;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Icons & spinner */
+.icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: rgba(255,255,255,0.95);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error text */
+.error {
+  color: var(--danger);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 14px; margin: 0 auto; min-height: 100vh; }
+  .card { padding: 16px; }
+  .button-row { justify-content: stretch; }
+  button { width: 100%; justify-content: center; }
+}
