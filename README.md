@@ -14,7 +14,6 @@ This project demonstrates a complete card payment flow using **Stripe** with a
 - Liquibase
 - PostgreSQL
 - Stripe Java SDK
-- Testcontainers (integration tests)
 
 ### Frontend
 - Vite
