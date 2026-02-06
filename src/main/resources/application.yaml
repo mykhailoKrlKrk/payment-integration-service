@@ -8,13 +8,9 @@ spring:
     username: ${DB_USERNAME:stripe_user}
     password: ${DB_PASSWORD:stripe_pass}
     driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-    open-in-view: false
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
 
 server:
   servlet:
@@ -42,5 +38,5 @@ stripe:
 
 payments:
   sync:
-    fixed-delay-ms: 30000
-    batch-size: 50
+    fixed-delay-ms: ${PAYMENTS_SYNC_RATE:300000}
+    batch-size: ${PAYMENTS_SYNC_BATCH_SIZE:50}
